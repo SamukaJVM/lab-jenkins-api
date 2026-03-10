@@ -1,0 +1,14 @@
+services:
+  lab-jenkins-api:
+    image: lab-jenkins-api:latest
+    container_name: lab-jenkins-api
+    restart: always
+    build: .
+    ports:
+      - "8084:8084"
+    networks:
+      - rede-local
+
+networks:
+  rede-local:
+    driver: bridge

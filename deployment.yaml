@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lab-jenkins-api
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: lab-jenkins-api
+  template:
+    metadata:
+      labels:
+        app: lab-jenkins-api
+    spec:
+      containers:
+        - name: lab-jenkins-api
+          image: samukajvm/lab-jenkins-api:latest
+          ports:
+            - name: http
+              containerPort: 8084
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lab-jenkins-api
+spec:
+  selector:
+    app: lab-jenkins-api
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 8084
+      protocol: TCP
+      nodePort: 30000
