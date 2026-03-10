@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: lab-jenkins-api
 spec:
-  replicas: 5
+  replicas: 2
   selector:
     matchLabels:
       app: lab-jenkins-api
