@@ -42,9 +42,15 @@ pipeline {
                 }
             }
         }
-        stage('Deploy') {
+        stage('Deploy no Kubernetes') {
+            environment {
+                tag_version = "${env.BUILD_ID}"
+            }
             steps {
-                sh 'mvn clean package'
+                withKubeConfig([credentialsId: 'kubeconfig']) {
+                    sh "sed -i 's/{{TAG}}/${tag_version}/g' deployment.yaml"
+                    sh 'kubectl apply -f deployment.yaml'
+                }
             }
         }
     }
