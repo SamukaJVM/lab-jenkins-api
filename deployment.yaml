@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: lab-jenkins-api
-          image: samukajvm/lab-jenkins-api:latest
+          image: samukajvm/jenkins_api:latest
           ports:
             - name: http
               containerPort: 8084
